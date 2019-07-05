@@ -1,0 +1,33 @@
+.sea-card {
+	border: 1px solid #eaeaea;
+	text-align: center;
+	box-shadow: 1px 3px 12px hsla(0,0%,0%,0.2);
+	margin: 20px 0;
+
+}
+.sea-card img {
+	width: 100%;
+	height: auto;
+	border: none;
+}
+.sea-card-name {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	padding: 10px 12px;
+	display: inline-block;
+	width: 100%;
+}
+/* infoBanner */
+.sea-infoBanner {
+	background: url(https://via.placeholder.com/100);
+	padding: 30px 15px;
+	display: block;
+	color: #fff;
+	text-shadow: 1px 3px 12px black;
+	font-size: 18px;
+	margin: 15px 0;
+}
+.sea-infoBanner:hover {
+	background: tomato;
+}

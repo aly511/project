@@ -18,8 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    {{-- error by bootstrap file --}}
+    <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+
 </head>
-<body>
+<body style="background: url({{asset('images/2.png')}}) no-repeat center fixed;background-size: cover;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
@@ -76,5 +80,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{asset('js/jquery.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 </body>
 </html>

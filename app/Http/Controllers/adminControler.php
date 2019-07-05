@@ -3,23 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-//use App\Http\Controllers\Auth;
 use App\product;
+use App\User;
+use App\table_session;
+use Session;
 class adminControler extends Controller
 {
     public function __construct()
     {
-        // if ( Auth::check() && Auth::user()->role=='user' )
-        // {
-        //     //return $next($request);
-        // }
-        if (Auth::user()->role=='user' )
-        {
-            return route('login') ;
-        }
-        else{$this->middleware('auth');}
-       // $user=session()->get('user_role');
-        //($this->middleware('auth')&&($user=='user' )) ;
+        $this->middleware('admin') ;
     }
     public function insert_page()
     {
@@ -27,19 +19,15 @@ class adminControler extends Controller
     }
     public function show()
     {
-        //$prods=product::all();
-        // $prods=product::latest()->paginate(4);// from last
-        $prods=product::paginate(2);// from begin
-        // return view('products_view',compact('prods'));
-        //return $prods;
+        $prods=product::paginate(3);
         return view('admin.home',compact('prods'));
     }
     public function data_valid(Request $request){
         $messages=[
-        'name'=>'name is required',
-        'img'=>'img is required',
-        'price'=>'price is required',
-        'quantity'=>'quantity is required',
+        'name'=>'pllease enter name',
+        'img'=>'pllease enter imaage',
+        'price'=>'please enter price',
+        'quantity'=>'please enter quantity',
         ];
         $this->validate($request,[
         'name'=>'required',
@@ -56,33 +44,21 @@ class adminControler extends Controller
         $prod->name=$request->input('name');
         $file=$request->file('img');
         $filename=$file->getClientOriginalName();
-        $file->move('images',$filename);
         $prod->image=$filename;
         $prod->price=$request->input('price');
         $prod->quantity=$request->input('quantity');
-       // $prod->user_id=Auth::user()->id;
-        // {{Auth::user()->id }}
         $prod->save();
-        //return back();
-         //return $prod;
-         return redirect(route('adminhome'));
+        Session::flash('success','data created successfuly.');
+        return redirect(route('adminhome'));
     }
-    public function view_edit($id){
+    public function view_edit($id)
+    {
         $prod=product::find($id);
-         //return $prod;
         return view('admin.edit_page',compact('prod'));
     }
-    // public function edit_ssession($id,Request $request){
-    //     //return $idd;
-    //     $cart = session()->get('cart');
-    //     //return $cart;
-    //     $cart[$id]['name']=$request->input('name');
-    //     $cart[$id]['price']=$request->input('price');
-    // }
-    public function edit($id,Request $request)
+    public function edit(  
+    )
     {
-        //return $id;
-        //$this->edit_ssession($id,$request);
         $prod=product::find($id);
         $prod->name=$request->input('name');
         $prod->price=$request->input('price');
@@ -96,6 +72,7 @@ class adminControler extends Controller
         $cart[$id]['price']=$request->input('price');
         session()->put('cart', $cart);
         //return $cart;
+        Session::flash('success','data edited successfuly.');
         return redirect(route('adminhome'));
     }
 

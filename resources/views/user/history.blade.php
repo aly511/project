@@ -8,34 +8,22 @@
     </div>
 </a>
 <div class="container">
-    {{-- this by relation  --}}
-    {{-- @if(count($prods)>0)
-    <table class="table table-dark">
-        <tbody>
-            @foreach ($prods as $prod)
-            <tr>
-                <td class=" text-center"> {{ $prod->name }}</td>
-                <td class=" text-center">
-                    <img src="{{asset('images/'.$prod->image)}}" class="img-responsive" style="width: 200px; height: 200px; overflow: hidden;">
-                </td>
-            </tr>
-            <hr>
-            @endforeach
-        </tbody>
-    </table>
-    @endif --}}
 
-    {{-- this by session  --}}
-     @if(count($carts)>0)
+    @if(count($carts)>0)
     <table class="table table-dark">
         <tr>
             <th>product name</th>
+            <th>product price</th>
             <th>product quantity</th>
+            <th>full money</th>
             <th>product image</th>
         </tr>
             @foreach ($carts as $cart)<tr>
+                {{-- <td class=" text-center"> {{ $cart->key }}</td> --}}
                 <td class=" text-center"> {{ $cart['name'] }}</td>
+                <td class=" text-center"> {{ $cart['price'] }}</td>
                 <td class=" text-center"> {{ $cart['num'] }}</td>
+                <td class=" text-center"> {{ $cart['total'] }}</td>
                 <td class=" text-center">
                     <img src="{{asset('images/'.$cart['image'])}}" class="img-responsive" style="width: 200px; height: 200px; overflow: hidden;">
                 </td>

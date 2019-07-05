@@ -23,6 +23,11 @@
     {{$prods->links()  }}
     @endif
 </div>
+{{-- <div class="row pb120">
+    <div class="col-lg-12">
+        {{$prods->links('vendor.pagination.default')}}
+    </div> --}}
+</div>
 
 
 
